@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html>
+  <script
+    src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/content/location/location.js"
+    id="eppiocemhmnlbhjplcgkofciiegomcon"
+  ></script>
+  <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/extend-native-history-api.js"></script>
+  <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/requests.js"></script>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- BEGIN META SECTION -->
+
+    <title>IPC v1.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta content="Олон улсын мал эмнэлгийн гэрчилгээ" name="description" />
+    <meta content="General authority of vet sector" name="author" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="https://ipc.mofa.gov.mn/public/images/favicon.png"
+    />
+    <!-- END META SECTION -->
+    <!-- BEGIN MANDATORY STYLE -->
+    <link rel="stylesheet" media="screen" href="myPrint.css" />
+    <link href="./icons.min.css" rel="stylesheet" />
+    <link href="./bootstrap.min.css" rel="stylesheet" />
+    <link href="./plugins.min.css" rel="stylesheet" />
+    <link href="./style.min.css" rel="stylesheet" />
+    <link href="./main.css" rel="stylesheet" />
+    <link href="./chatStyle.css" rel="stylesheet" />
+    <!-- END  MANDATORY STYLE -->
+    <style>
+      h6 {
+        font-size: 12px !important;
+      }
+
+      h5 {
+        font-size: 12px !important;
+      }
+    </style>
+    <script
+      bis_use="true"
+      type="text/javascript"
+      charset="utf-8"
+      data-bis-config='["facebook.com/","twitter.com/","youtube-nocookie.com/embed/","//vk.com/","//www.vk.com/","linkedin.com/","//www.linkedin.com/","//instagram.com/","//www.instagram.com/","//www.google.com/recaptcha/api2/","//hangouts.google.com/webchat/","//www.google.com/calendar/","//www.google.com/maps/embed","spotify.com/","soundcloud.com/","//player.vimeo.com/","//disqus.com/","//tgwidget.com/","//js.driftt.com/","friends2follow.com","/widget","login","//video.bigmir.net/","blogger.com","//smartlock.google.com/","//keep.google.com/","/web.tolstoycomments.com/","moz-extension://","chrome-extension://","/auth/","//analytics.google.com/","adclarity.com","paddle.com/checkout","hcaptcha.com","recaptcha.net","2captcha.com","accounts.google.com","www.google.com/shopping/customerreviews","buy.tinypass.com","gstatic.com","secureir.ebaystatic.com","docs.google.com","contacts.google.com","github.com","mail.google.com","chat.google.com","audio.xpleer.com","keepa.com","static.xx.fbcdn.net","sas.selleramp.com","1plus1.video","console.googletagservices.com","//lnkd.demdex.net/","//radar.cedexis.com/","//li.protechts.net/","challenges.cloudflare.com/","ogs.google.com"]'
+      src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/traffic.js"
+    ></script>
+  </head>
+
+  <body
+    class="fade-in"
+    __processed_5e85f8b1-8def-4c73-b491-552a68d4562b__="true"
+    bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCIsIlBJTlRFUkVTVCI6ImRpc2FibGVkIiwiSU5TVEFHUkFNIjoiZGlzYWJsZWQiLCJMSU5LRURJTiI6ImRpc2FibGVkIiwiQ09ORklHIjoiZGlzYWJsZWQifSwidmVyc2lvbiI6IjIuMC4yMiIsInNjb3JlIjoyMDAyMn1d"
+  >
+    <style>
+      @media only print {
+        table {
+          border-collapse: collapse;
+        }
+
+        tr,
+        td,
+        th {
+          border: 1pt solid black;
+        }
+
+        table.printCerTable tr {
+          height: 37px !important;
+        }
+
+        @page {
+          size: A4;
+          margin-top: 10mm;
+          margin-right: 20mm;
+          margin-left: 20mm;
+        }
+      }
+      table {
+        border-collapse: collapse;
+      }
+
+      tr,
+      td,
+      th {
+        border: 1pt solid black;
+      }
+    </style>
+    <div
+      style="
+        width: 785px;
+        background-color: white;
+        padding-left: 30px;
+        padding-top: 10px;
+        padding-right: 42px;
+        padding-bottom: 50px;
+        height: 330mm;
+      "
+      bis_skin_checked="1"
+    >
+      <div style="display: flex" bis_skin_checked="1">
+        <div
+          style="line-height: 1px; width: 640px; text-align: center"
+          bis_skin_checked="1"
+        >
+          <p class="text-center">Засгийн газрын хэрэгжүүлэгч агентлаг</p>
+          <h5 class="text-center">УРГАМАЛ ХАМГААЛЛЫН ГАЗАР</h5>
+          <h3 class="text-center" style="font-size: 26.5px">
+            <b>ИМПОРТЫН МЭДЭГДЭЛ</b>
+          </h3>
+          <h6 style="font-size: 11px; padding-left: 5%">
+            УРГАМАЛ, ТЭДГЭЭРИЙН ГАРАЛТАЙ ТҮҮХИЙ ЭД, БҮТЭЭГДЭХҮҮН
+          </h6>
+        </div>
+        <div id="qrcode" style="width: 120px" bis_skin_checked="1">
+          <img src="./IPC v1.0_files/qrcode_728.png" />
+        </div>
+      </div>
+      <div class="row" bis_skin_checked="1">
+        <div
+          class="text-end pt-4"
+          style="text-align: right"
+          bis_skin_checked="1"
+        >
+          <b>№ 252010603</b>
+        </div>
+      </div>
+
+      <div class="row" bis_skin_checked="1">
+        <h6 class="text-center" style="text-align: center">
+          I. ЕРӨНХИЙ МЭДЭЭЛЭЛ
+        </h6>
+        <table
+          cellpadding="0"
+          cellspacing="0"
+          style="display: block; font-size: 12px"
+        >
+          <tbody>
+            <tr>
+              <td
+                width="10%"
+                rowspan="2"
+                style="
+                  padding: 3px;
+                  word-wrap: break-word;
+                  font-weight: bold;
+                  background-color: #eafaea;
+                "
+              >
+                Импортлогч/ <br />
+                Хүлээн авагч:<br />
+                Хаяг:
+              </td>
+              <td
+                width="35%"
+                rowspan="2"
+                style="padding: 3px; word-wrap: break-word"
+              >
+                Мөнхийн үйлст од Хязгаарлагдмал хариуцлагатай компани,
+                <br />Монгол, Улаанбаатар, Сүхбаатар, 7-р хороо
+              </td>
+              <td
+                width="25%"
+                style="
+                  padding: 3px;
+                  word-wrap: break-word;
+                  background-color: #eafaea;
+                  font-weight: bold;
+                "
+              >
+                Тээврийн хэрэгслийн төрөл
+              </td>
+              <td
+                width="20%"
+                style="
+                  padding: 3px;
+                  word-wrap: break-word;
+                  font-weight: bold;
+                  background-color: #eafaea;
+                "
+              >
+                Нэвтрүүлэх боомт:
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 3px; word-wrap: break-word">Ачааны машин</td>
+              <td style="padding: 3px; word-wrap: break-word">Замын-Үүд</td>
+            </tr>
+            <tr>
+              <td
+                width="10%"
+                rowspan="3"
+                style="
+                  background-color: #eafaea;
+                  padding: 3px;
+                  word-wrap: break-word;
+                  font-weight: bold;
+                "
+              >
+                Экспортлогч/ <br />
+                Илгээгч:<br />
+                Хаяг:
+              </td>
+              <td rowspan="3" style="padding: 3px; word-wrap: break-word">
+                NIKKOUKIN LIMITED COMPANY <br />
+                No.101 118/1 YAMASHITACHO , NAKA-KU, YOKOHAMA-SHI, KANAGAWA
+                231-0023 JAPAN
+              </td>
+              <td
+                style="
+                  background-color: #eafaea;
+                  padding: 3px;
+                  word-wrap: break-word;
+                  font-weight: bold;
+                "
+              >
+                Илгээгч улс:
+              </td>
+              <td
+                style="
+                  background-color: #eafaea;
+                  padding: 3px;
+                  word-wrap: break-word;
+                  font-weight: bold;
+                "
+              >
+                Үйлдвэрлэгч
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 3px; word-wrap: break-word">JAPAN</td>
+              <td style="padding: 3px; word-wrap: break-word">
+                NIKKOUKIN LIMITED COMPANY
+              </td>
+            </tr>
+            <tr style=>
+              <td
+                style="
+                  background-color: #eafaea;
+                  padding: 3px;
+                  word-wrap: break-word;
+                  font-weight: bold;
+                "
+              >
+                Худалдааны гэрээ, хэлэлцээрийн дугаар:
+              </td>
+              <td style="max-height: 20px; padding: 3px; word-wrap: break-word">
+                NC2025002
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h6 class="text-center" style="text-align: center">
+          II. БАРААНЫ МЭДЭЭЛЭЛ
+        </h6>
+        <div style="width: 740px; height: 450px" bis_skin_checked="1">
+          <table
+            cellpadding="0"
+            cellspacing="0"
+            style="display: block"
+            class="printCerTable"
+          >
+            <thead style="font-size: 12px">
+              <tr>
+                <th
+                  style="
+                    text-transform: none;
+                    font-weight: bold;
+                    background-color: #eafaea;
+                    padding: 5px;
+                  "
+                  rowspan="2"
+                  width="3%"
+                >
+                  №
+                </th>
+                <th
+                  style="
+                    text-transform: none;
+                    font-weight: bold;
+                    background-color: #eafaea;
+                    text-align: center;
+                  "
+                  rowspan="2"
+                  width="30%"
+                >
+                  Оноосон нэр<br />
+                  /Барааны нэр/
+                </th>
+                <th
+                  style="
+                    text-transform: none;
+                    font-weight: bold;
+                    background-color: #eafaea;
+                    text-align: center;
+                  "
+                  rowspan="2"
+                  width="10%"
+                >
+                  БТКУС-ийн код
+                </th>
+                <th
+                  style="
+                    text-transform: none;
+                    font-weight: bold;
+                    background-color: #eafaea;
+                    text-align: center;
+                  "
+                  rowspan="2"
+                  width="15%"
+                >
+                  Зориулалт
+                </th>
+                <th
+                  style="
+                    text-transform: none;
+                    font-weight: bold;
+                    background-color: #eafaea;
+                    text-align: center;
+                  "
+                  colspan="2"
+                  width="20%"
+                >
+                  Сав баглааны мэдээлэл
+                </th>
+                <th
+                  style="
+                    text-transform: none;
+                    font-weight: bold;
+                    background-color: #eafaea;
+                    text-align: center;
+                  "
+                  rowspan="2"
+                  width="7%"
+                >
+                  Хэмжих нэгж
+                </th>
+                <th
+                  style="
+                    text-transform: none;
+                    font-weight: bold;
+                    background-color: #eafaea;
+                    text-align: center;
+                  "
+                  rowspan="2"
+                  width="7%"
+                >
+                  Нийт хэмжээ
+                </th>
+              </tr>
+              <tr style="background-color: #eafaea">
+                <th
+                  style="
+                    text-transform: none;
+                    font-weight: bold;
+                    rotate: -90deg;
+                    width: 0px;
+                    text-align: center;
+                    height: 80px;
+                  "
+                >
+                  Төрөл
+                </th>
+                <th
+                  style="
+                    text-transform: none;
+                    font-weight: bold;
+                    rotate: -90deg;
+                    width: 0px;
+                    text-align: center;
+                    height: 80px;
+                  "
+                >
+                  Тоо хэмжээ
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="max-height: 10px">
+                <td
+                  class="text-center"
+                  style="
+                    width: 10px;
+                    padding: 5px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  1
+                </td>
+                <td
+                  style="
+                    max-width: 25px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  жүржийн мод
+                </td>
+                <td
+                  style="
+                    max-width: 20px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  06029000
+                </td>
+                <td
+                  style="
+                    max-width: 10px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Судалгаа шинжилгээний зориулалттай
+                </td>
+                <td
+                  style="
+                    max-width: 18px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Ширхэг
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  30
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Кг
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  30
+                </td>
+              </tr>
+              <tr style="max-height: 10px">
+                <td
+                  class="text-center"
+                  style="
+                    width: 10px;
+                    padding: 5px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  2
+                </td>
+                <td
+                  style="
+                    max-width: 25px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  алимны мод
+                </td>
+                <td
+                  style="
+                    max-width: 20px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  06029000
+                </td>
+                <td
+                  style="
+                    max-width: 10px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Судалгаа шинжилгээний зориулалттай
+                </td>
+                <td
+                  style="
+                    max-width: 18px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Ширхэг
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  20
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Кг
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  20
+                </td>
+              </tr>
+              <tr style="max-height: 10px">
+                <td
+                  class="text-center"
+                  style="
+                    width: 10px;
+                    padding: 5px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  3
+                </td>
+                <td
+                  style="
+                    max-width: 25px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  усан үзмийн мод
+                </td>
+                <td
+                  style="
+                    max-width: 20px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  06029000
+                </td>
+                <td
+                  style="
+                    max-width: 10px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Судалгаа шинжилгээний зориулалттай
+                </td>
+                <td
+                  style="
+                    max-width: 18px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Ширхэг
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  20
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Кг
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  20
+                </td>
+              </tr>
+              <tr style="max-height: 10px">
+                <td
+                  class="text-center"
+                  style="
+                    width: 10px;
+                    padding: 5px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  4
+                </td>
+                <td
+                  style="
+                    max-width: 25px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  хар чавганы мод
+                </td>
+                <td
+                  style="
+                    max-width: 20px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  06029000
+                </td>
+                <td
+                  style="
+                    max-width: 10px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Судалгаа шинжилгээний зориулалттай
+                </td>
+                <td
+                  style="
+                    max-width: 18px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Ширхэг
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  80
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Кг
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  80
+                </td>
+              </tr>
+              <tr style="max-height: 10px">
+                <td
+                  class="text-center"
+                  style="
+                    width: 10px;
+                    padding: 5px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  5
+                </td>
+                <td
+                  style="
+                    max-width: 25px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  хасарваань мод
+                </td>
+                <td
+                  style="
+                    max-width: 20px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  06029000
+                </td>
+                <td
+                  style="
+                    max-width: 10px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Судалгаа шинжилгээний зориулалттай
+                </td>
+                <td
+                  style="
+                    max-width: 18px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Ширхэг
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  20
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  Кг
+                </td>
+                <td
+                  style="
+                    max-width: 3px;
+                    padding: 3px;
+                    word-wrap: break-word;
+                    font-size: 11px;
+                  "
+                >
+                  20
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row" bis_skin_checked="1">
+          <div style="width: 189mm; margin-top: 50px" bis_skin_checked="1">
+            <div style="text-align: center" bis_skin_checked="1">
+              <p>
+                <b>Хүсэлт гаргасан хэлбэр: </b>Ургамал хамгааллын газрын цахим
+                систем<br />Ургамал хамгааллын газрын системээс олгосон
+                давтагдашгүй дугаар бүхий цахим баримт бичиг нь цаасан баримт
+                бичгийн нэгэн адил хүчинтэй байна.
+              </p>
+            </div>
+            <div class="row" bis_skin_checked="1">
+              <div
+                class="col-md-3 col-sm-3 col-xs-3"
+                style="display: inline"
+                bis_skin_checked="1"
+              >
+                <div
+                  style="
+                    margin-left: 0%;
+                    width: 45mm;
+                    height: 50mm;
+                    position: absolute;
+                  "
+                  bis_skin_checked="1"
+                >
+                  <img
+                    src="./gerchilgeeTemdeg.png"
+                    class="imgIcon"
+                    data-rel="tooltip"
+                    type="image"
+                    extension="png"
+                    filesize="0.02"
+                    style="width: 100%; height: auto"
+                  />
+                </div>
+                <div
+                  style="margin-top: 20%; margin-left: 28%; font-size: 15px"
+                  bis_skin_checked="1"
+                >
+                  Тэмдэг
+                </div>
+              </div>
+              <div
+                class="col-md-9 col-sm-9 col-xs-9"
+                style="display: inline"
+                bis_skin_checked="1"
+              >
+                <table
+                  cellpadding="0"
+                  cellspacing="0"
+                  border="0"
+                  class="myTableImportCer table-bordered"
+                  style="font-size: 12px; line-height: 14px"
+                >
+                  <tbody>
+                    <tr>
+                      <td width="33.3%" style="text-align: center">
+                        <b>Мэдэгдэл олгосон байгууллага</b>
+                      </td>
+                      <td width="33.3%" style="text-align: center">
+                        <b>Олгосон албан тушаалтны нэр</b>
+                      </td>
+                      <td width="33.3%" style="text-align: center">
+                        <b>Олгосон огноо</b>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td rowspan="4" style="text-align: center">
+                        ЗАСГИЙН ГАЗРЫН ХЭРЭГЖҮҮЛЭГЧ АГЕНТЛАГ УРГАМАЛ ХАМГААЛЛЫН
+                        ГАЗАР
+                      </td>
+                      <td rowspan="4" style="text-align: center">
+                        <div style="height: 70px" bis_skin_checked="1">
+                          <div style="text-align: left" bis_skin_checked="1">
+                            Э.Уламбаатар
+                          </div>
+                          <div
+                            style="
+                              height: 28px;
+                              width: 171px;
+                              position: absolute;
+                              margin-top: 10px;
+                            "
+                            bis_skin_checked="1"
+                          >
+                            <img
+                              src="./1746157465251.png"
+                              class="imgIcon"
+                              data-rel="tooltip"
+                              type="image"
+                              extension="png"
+                              filesize="0.02"
+                              style="
+                                width: 100%;
+                                height: auto;
+                                margin-top: -21px;
+                              "
+                            />
+                          </div>
+                          <div
+                            style="margin-top: 40px; text-align: right"
+                            bis_skin_checked="1"
+                          >
+                            /Гарын үсэг/
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2025-06-05</td>
+                    </tr>
+                    <tr>
+                      <td>Дуусах огноо</td>
+                    </tr>
+                    <tr>
+                      <td>2025-09-05</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p style="text-align: center; font-size: 11px; margin-top: 7px">
+                  Байгууллагын хаяг: Дархан-Уул, Дархан, 14-р баг, ХАА-н байр,
+                  Ургамал хамгааллын газар<br />
+                  Мэдээлэл хариуцагч байгууллагын холбоо барих утас: 51263408
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      style="
+        width: 785px;
+        background-color: white;
+        padding-left: 30px;
+        padding-top: 50px;
+        padding-right: 42px;
+        padding-bottom: 50px;
+      "
+      bis_skin_checked="1"
+    ></div>
+
+    <script src="./qrious.min.js.download"></script>
+  </body>
+</html>
